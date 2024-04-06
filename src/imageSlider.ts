@@ -1,19 +1,50 @@
 const thumbailImages: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="thumbail-product-images"]')
-// const thumbailImages = document.querySelector('.images-thumbails') as HTMLDivElement
 const fullImage = document.querySelector('[data-open-ligthbox]') as HTMLImageElement
 
-let currentImage: number = 1
+const nextImageButton = document.querySelector('[data-next-image]')
+const previousImageButton = document.querySelector('[data-previous-image]')
+
+const nextImageButtonLigthbox = document.querySelector('[data-next-image-ligthbox]')
+const previousImageButtonLigthbox = document.querySelector('[data-previous-image-ligthbox]')
+
+const PRODUCT_IMAGES_QUANTITY = 4
+let currentImage: number = 0
+thumbailImages[0].checked = true
+
+function autoSlide() {
+  currentImage === PRODUCT_IMAGES_QUANTITY - 1 ? currentImage = 0 : currentImage++
+  thumbailImages[currentImage - 1].checked = true
+  fullImage.style.marginLeft = `${-100 * (currentImage - 1)}%`
+}
+
+let autoSlideInterval = setInterval(autoSlide, 10000)
+
+function swapImages() {
+  clearInterval(autoSlideInterval)
+  autoSlideInterval = setInterval(autoSlide, 10000)
+
+  fullImage.style.marginLeft = `${-100 * (currentImage)}%`
+}
 
 thumbailImages.forEach((thumbailImage) => {
   thumbailImage.addEventListener('click', (event) => {
     const selectedElement = event.target as HTMLInputElement
-    if(selectedElement) currentImage = parseInt(selectedElement.value)
-    if(fullImage) fullImage.style.marginLeft = `${-100 * (currentImage - 1)}%`
+    currentImage = parseInt(selectedElement.value) -1
+
+    swapImages()
   })
 })
 
-setInterval(() => {
-  currentImage + 1 > 4 ? currentImage = 1 : currentImage++
-  thumbailImages[currentImage - 1].checked = true
-  if(fullImage) fullImage.style.marginLeft = `${-100 * (currentImage - 1)}%`
-}, 5000)
+nextImageButton?.addEventListener('click', () => {
+  currentImage === PRODUCT_IMAGES_QUANTITY - 1 ?  currentImage = 0: currentImage++
+  swapImages()
+  console.log(currentImage)
+})
+
+
+previousImageButton?.addEventListener('click', () => {
+  currentImage === 0 ?  currentImage = PRODUCT_IMAGES_QUANTITY - 1 : currentImage--
+  swapImages()
+  console.log(currentImage)
+
+})

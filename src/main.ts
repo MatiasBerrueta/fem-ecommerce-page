@@ -1,36 +1,18 @@
-const minusCounterButton = document.querySelector('[data-minus-counter]') as HTMLButtonElement
-const plusCounterButton = document.querySelector('[data-plus-counter]') as HTMLButtonElement
-const productQuantityCounter = document.querySelector('[data-quantity-counter]')
 const fullImageLigthbox = document.querySelector('[data-full-image-ligthbox]') as HTMLImageElement
 const closeLigthbox = document.querySelector('[data-close-ligthbox]')
 const ligthBox = document.querySelector('[data-ligthbox]')
 const thumbailImagesLigthbox: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="thumbail-product-images-ligthbox"]')
-const previousImageButton = document.querySelector('[data-previous-image]')
-const previousImageButtonLigthbox = document.querySelector('[data-previous-image-ligthbox]')
-const nextImageButton = document.querySelector('[data-next-image]')
-const nextImageButtonLigthbox = document.querySelector('[data-next-image-ligthbox]')
+
 const removeProductButton = document.querySelector('[data-remove-product]')
 const totalPrice = document.querySelector('[data-total-price]')
 const quantityProductCartCounter = document.querySelector('[data-product-quantity-cart]')
 const smallQuantityProductCartCounter = document.querySelector('[data-small-product-quantity-cart]')
+
 const mobileMenu = document.querySelector('[data-mobile-menu]')
 const mobileMenuOpen = document.querySelector('[data-mobile-menu-open]')
 const mobileMenuClose = document.querySelector('[data-mobile-menu-close]')
 
-let productQuantity = 1
 let currentLigthboxImage = 1
-
-minusCounterButton?.addEventListener('click', () => {
-	if(productQuantity - 1 == 1) minusCounterButton.disabled = true
-	productQuantity--
-	if(productQuantityCounter) productQuantityCounter.textContent = productQuantity.toString()
-})
-
-plusCounterButton?.addEventListener('click', () => {
-	minusCounterButton.disabled = false
-	productQuantity++
-	if(productQuantityCounter) productQuantityCounter.textContent = productQuantity.toString()
-})
 
 // fullImage?.addEventListener('click', () => {
 // 	if(window.screen.width <= 700) return

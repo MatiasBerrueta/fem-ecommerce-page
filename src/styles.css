@@ -17,14 +17,14 @@
 
 body {
   font-family: Kumbh Sans;
-  margin: 0 10%;
+  margin: 0 clamp(10%, 50vw, 15%);
   color: var(--title-color);
 }
 
 .header {
   display: flex;
   align-items: center;
-  border-bottom: 2px solid var(--counter-color);
+  border-bottom: 1px solid var(--ligth-text-color);
 }
 
 .header-nav {
@@ -33,21 +33,18 @@ body {
 
 .logo {
   color: black;
-  transition: 50ms;
   padding: 1.5rem;
 }
 
 .logo:hover,
 .logo:focus-visible {
   color: hsl(0, 0%, 40%);
-  outline: none;
 }
 
 .header-nav ul {
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
-  /* padding: 0; */
   list-style: none;
   margin: 0;
   height: 100%;
@@ -56,7 +53,6 @@ body {
 
 .header-nav ul a {
   text-decoration: none;
-  display: block;
   height: 100%;
   color: inherit;
   padding: 2.15rem 1rem;
@@ -74,21 +70,17 @@ body {
   width: calc(100% - 1.5rem);
   height: 0.25rem;
   background-color: var(--primary-color);
-  left: 0.75rem;
+  left: 50%;
   top: 100%;
-  transform: scaleX(0);
-  transition: 100ms ease-in-out;
-  transform-origin: center;
-}
-
-.header-nav ul a:focus-visible {
-  outline: none;
+  transform: scaleX(0) translateX(-50%);
+  transition: 125ms ease-in-out;
+  transform-origin: left;
 }
 
 .header-nav ul a:hover::after,
 .header-nav ul a:focus-visible::after {
   color: var(--title-color);
-  transform: scaleX(1);
+  transform: scaleX(1) translateX(-50%);
 }
 
 .user-section {
@@ -154,18 +146,16 @@ body {
 
 .cart-modal {
   position: absolute;
+  width: 35ch;
   background: white;
-  box-shadow: 0 7px 25px -10px hsl(0, 0%, 25%, 0.75);
+  box-shadow: 0 5px 15px 1px hsl(0, 0%, 45%, 0.25);
   border-radius: 10px;
   top: calc(100% + 1rem);
-  right: 0;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  user-select: none;
-  transition: transform 400ms, opacity 250ms;
-  transform: translateY(20%);
-  padding: 1.5rem;
+  right: calc(100%);
+  transition: all 150ms ease-in-out, transform 225ms ease-in-out;
+  transform: translate(50%, 20%);
+  font-size: 1.15rem;
+  z-index: 1;
 }
 
 .cart-modal:not(.open) {
@@ -180,39 +170,30 @@ body {
   visibility: visible;
   pointer-events: initial;
   user-select: initial;
-  transform: translateY(0);
+  transform: translate(50%, 0);
 }
 
 .cart-modal-header {
   color: var(--title-color);
   font-weight: 700;
-  border-bottom: 1px solid var(--counter-color);
+  border-bottom: 1px solid var(--ligth-text-color);
   transition: inherit;
+  padding: 1.5rem;
 }
 
 .cart-modal-content {
-  position: relative;
-}
-
-.cart-modal-content::after {
-  content: 'Your cart is empty.';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: white;
-  color: var(--text-color);
-  font-weight: 700;
-  top: 0;
-  left: 0;
-  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  user-select: none;
-  pointer-events: none;
-  z-index: 1;
+  padding: 1.5rem;
+  font-weight: bold;
+  color: var(--ligth-text-color);
+}
+
+.cart-modal-content img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 5px;
 }
 
 .total-price {
@@ -259,11 +240,11 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 6rem 3rem;
+  margin: 6rem 4rem;
 }
 
 main > section {
-  width: calc(50% - 5rem);
+  width: 50vh;
 }
 
 .images-thumbails,
@@ -281,7 +262,6 @@ main > section {
 
 .current-image-selector::after {
   content: '';
-  transition: 100ms;
   border-radius: 10px;
   opacity: 0;
   position: absolute;
@@ -320,11 +300,6 @@ main > section {
   width: 100%;
   position: relative;
   outline: 2px solid transparent;
-  transition: 100ms;
-}
-
-.thumbail-image.selected::after {
-  opacity: 0.65;
 }
 
 .company-name {
@@ -347,15 +322,13 @@ main > section {
   margin: 2rem 0;
 }
 
-.product-price,
-.product-price-mobile {
+.product-price {
   font-size: 1.75rem;
   font-weight: 700;
   position: relative;
 }
 
-.product-price.discount::after,
-.product-price-mobile.discount::after {
+.product-price.discount::after {
   content: attr(data-discount);
   position: absolute;
   font-size: 1rem;
@@ -369,8 +342,7 @@ main > section {
   background-color: var(--pale-primary-color);
 }
 
-.product-old-price,
-.product-old-price-mobile {
+.product-old-price {
   display: block;
   font-weight: 700;
   color: var(--ligth-text-color);
@@ -444,8 +416,8 @@ main > section {
 }
 
 .ligthbox {
+  display: none;
   position: absolute;
-  display: flex;
   left: 0;
   top: 0;
   width: 100vw;
@@ -474,7 +446,6 @@ main > section {
   overflow: hidden;
   border-radius: 20px;
   position: relative;
-  height: 50vh;
 }
 
 .ligthbox-image-slides,
@@ -592,28 +563,16 @@ button:disabled:hover {
 
 
 .mobile-menu {
-  display: none;
   position: absolute;
   height: 100vh;
   width: 100vw;
   z-index: 2;
-  background: hsl(0, 0%, 0%, 0.75);
+  background: hsl(0, 0%, 10%, 0.65);
   opacity: 0;
   visibility: hidden;
   user-select: none;
   position: none;
-  transition: 250ms;
-}
-
-.mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-  user-select: initial;
-  position: initial;
-}
-
-.mobile-menu.open .mobile-menu-content {
-  margin-left: 0;
+  transition: 250ms ease-in-out;
 }
 
 .mobile-menu-content {
@@ -621,8 +580,18 @@ button:disabled:hover {
   padding: 1.5rem;
   width: 70vw;
   height: 100%;
-  margin-left: -60%;
-  transition: 250ms;
+  transition: 175ms ease-in-out;
+  transform: translateX(-50%);
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+  user-select: initial;
+}
+
+.mobile-menu.open .mobile-menu-content {
+  transform: translateX(0);
 }
 
 .mobile-menu-nav ul {
@@ -663,10 +632,6 @@ button:disabled:hover {
     display: block;
   }
 
-  .mobile-menu {
-    display: block;
-  }
-
   body {
     width: 100%;
     margin: 0;
@@ -684,9 +649,8 @@ button:disabled:hover {
     display: none;
   }
 
-  .user-button {
-    width: 2rem;
-    height: 2rem;
+  .logo {
+    padding: 0.75rem 1.5rem;
   }
 
   .cart-menu {
@@ -694,7 +658,12 @@ button:disabled:hover {
     right: -2.5vw;
     width: 95vw;
     transition: 0s;
-    z-index: 1;
+    z-index: 2;
+  }
+  
+  .user-button {
+    width: 2rem;
+    height: 2rem;
   }
 
   main {
@@ -703,7 +672,15 @@ button:disabled:hover {
     margin: 0;
   }
 
-  .thumbail-images {
+  main > section {
+    width: 100%;
+  }
+
+  .product-info-section {
+    padding: 1.5rem;
+  }
+
+  .images-thumbails {
     display: none;
   }
 
@@ -717,23 +694,18 @@ button:disabled:hover {
     object-fit: cover;
   }
 
-  .next-image-button-mobile,
   .previous-image-button-mobile {
-    --button-size: 2.5rem;
-    right: calc(100% - (var(--button-size) * 1.5));
-    display: flex;
+    display: block;
+    top: 50%;
+    left: 0;
+    transform: translate(1rem, -50%);
   }
 
   .next-image-button-mobile {
-    left: calc(100% - (var(--button-size) * 1.5));
-  }
-
-  .rigth-section {
-    margin: 1.5rem 5%;
-  }
-
-  .company-name {
     display: block;
+    top: 50%;
+    right: 0;
+    transform: translate(calc(-50% - 1rem), -50%);
   }
 
   .product-name {
@@ -741,16 +713,14 @@ button:disabled:hover {
   }
 
   .product-description {
-    margin: 0 0;
+    margin: 0;
   }
 
-  .product-price,
-  .product-old-price {
-    display: none;
-  }
-
-  .mobile-price-section {
+  .price-section {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
   }
 
   .buy-section {
@@ -761,5 +731,16 @@ button:disabled:hover {
 
   .buy-section > * {
     width: 100%;
+  }
+
+  .cart-modal {
+    transform: translateY(10%);
+    width: calc(100vw - 1rem);
+    top: calc(100% + 2rem);
+    right: 0%;
+  }
+
+  .cart-modal.open {
+    transform: translateY(0%);
   }
 }
