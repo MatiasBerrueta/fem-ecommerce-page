@@ -740,5 +740,6 @@ button:disabled:hover {
     max-width: calc(100vw - 1.5rem);
     top: calc(100% + 1.25rem);
     left: calc(-100% + 1.5rem);
+    z-index: 10;
   }
 }
