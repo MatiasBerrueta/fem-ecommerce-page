@@ -3,7 +3,6 @@ const closeLigthbox = document.querySelector('[data-close-ligthbox]')
 const ligthBox = document.querySelector('[data-ligthbox]')
 const thumbailImagesLigthbox: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="thumbail-product-images-ligthbox"]')
 
-const removeProductButton = document.querySelector('[data-remove-product]')
 const totalPrice = document.querySelector('[data-total-price]')
 const quantityProductCartCounter = document.querySelector('[data-product-quantity-cart]')
 const smallQuantityProductCartCounter = document.querySelector('[data-small-product-quantity-cart]')
@@ -24,11 +23,11 @@ closeLigthbox?.addEventListener('click', () => {
 })
 
 mobileMenuOpen?.addEventListener('click', () => {
-	mobileMenu?.classList.add('open')
+	mobileMenu?.classList.remove('hide')
 })
 
 mobileMenuClose?.addEventListener('click', () => {
-	mobileMenu?.classList.remove('open')
+	mobileMenu?.classList.add('hide')
 })
 
 thumbailImagesLigthbox.forEach(thumbailImage => {
