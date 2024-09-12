@@ -61,7 +61,7 @@ addToCartButton?.addEventListener('click', () => {
 	if(cartQuantityCounter) cartQuantityCounter.textContent = productQuantityCart.toString()
   if(cartModalContent) cartModalContent.innerHTML = `
 	<div class="cart-modal-product">
-		<img src="images/image-product-1-thumbnail.jpg" alt="product image">
+		<img src="src/assets/image-product-1-thumbnail.jpg" alt="product image">
 		<div class="cart-product-info">
 			<span class="cart-product-name">Fall Limited Edition Sneakers</span>
 			<p><span>${PRODUCT_FINAL_PRICE}</span><span data-product-quantity-cart> x ${productQuantityCart} </span><span class="total-price" data-total-price>$${PRODUCT_FINAL_PRICE * productQuantityCart}</span></p>

@@ -31,13 +31,13 @@ thumbailImages.forEach((thumbailImage) => {
 })
 
 nextImageButton?.addEventListener('click', () => {
-  currentImage === PRODUCT_IMAGES_QUANTITY - 1 ?  currentImage = 0: currentImage++
+  currentImage = (currentImage + 1) % PRODUCT_IMAGES_QUANTITY
   swapImages()
 })
 
 
 previousImageButton?.addEventListener('click', () => {
-  currentImage === 0 ?  currentImage = PRODUCT_IMAGES_QUANTITY - 1 : currentImage--
+  currentImage = (currentImage - 1 + PRODUCT_IMAGES_QUANTITY) % PRODUCT_IMAGES_QUANTITY
   swapImages()
 })
 
@@ -62,7 +62,7 @@ closeLigthboxButton?.addEventListener('click', () => {
 })
 
 previousImageButtonLigthbox?.addEventListener('click', () => {
-	currentLigthboxImage = (currentLigthboxImage - 1) % PRODUCT_IMAGES_QUANTITY
+	currentLigthboxImage = (currentLigthboxImage - 1 + PRODUCT_IMAGES_QUANTITY) % PRODUCT_IMAGES_QUANTITY
 	thumbailImagesLigthbox[currentLigthboxImage].checked = true
 	fullImageLigthbox.style.marginLeft = `${-100 * (currentLigthboxImage)}%`
 })
